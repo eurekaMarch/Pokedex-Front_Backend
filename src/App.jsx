@@ -6,7 +6,7 @@ function App() {
     <div>
       <div>App</div>
       <Image width={200} src={PokeTitle} />
-      <Button type="primary">Clickme</Button>
+      <Button type="primary">Click me</Button>
     </div>
   );
 }
