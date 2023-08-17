@@ -1,13 +1,15 @@
-import { Button, Image } from "antd";
-import PokeTitle from "./assets/images/pokedex.png";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import SearchPage from "./components/SearchPage";
+import PokemonInfo from "./components/PokemonInfo";
 
 function App() {
   return (
-    <div>
-      <div>App</div>
-      <Image width={200} src={PokeTitle} />
-      <Button type="primary">Click me</Button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<SearchPage />} />
+        <Route path="/pokemon" element={<PokemonInfo />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
