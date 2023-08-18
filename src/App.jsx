@@ -1,11 +1,12 @@
 import {
   Route,
   // Routes,
+  // BrowserRouter,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import SearchPage from "./components/SearchPage";
+import SearchPage from "./components/SearchPage/SearchPage";
 import PokemonInfo from "./components/PokemonInfo";
 
 function App() {
