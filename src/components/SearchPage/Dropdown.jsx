@@ -1,4 +1,4 @@
-import { Dropdown as DropdownAntd } from "antd";
+import { Dropdown as DropdownAntd, Space } from "antd";
 import Button from "../Button";
 
 const mocMenu = [
@@ -50,7 +50,9 @@ const mocMenu = [
 function Dropdown() {
   return (
     <DropdownAntd menu={{ mocMenu }}>
-      <Button />
+      <div onClick={(e) => e.preventDefault()}>
+        <Space>Hover me</Space>
+      </div>
     </DropdownAntd>
   );
 }
