@@ -13,6 +13,7 @@ const StyledButton = styled(Button)`
 function SearchPage() {
   return (
     <div>
+      App
       <Image width={200} src={PokeTitle} />
       <StyledButton type="primary" bgColor="red">
         Click me
