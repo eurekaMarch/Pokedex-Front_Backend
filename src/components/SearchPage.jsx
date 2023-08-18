@@ -9,6 +9,9 @@ import styled from "styled-components";
 const StyledButton = styled(Button)`
   background-color: ${({ bgColor }) => bgColor || "orange"};
   border-radius: 12px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.6;
 `;
 function SearchPage() {
   return (
