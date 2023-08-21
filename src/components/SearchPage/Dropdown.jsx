@@ -1,13 +1,7 @@
-import { Dropdown as DropdownAntd, Space, Button } from "antd";
+import { Dropdown as DropdownAntd, Space } from "antd";
 import styled from "styled-components";
+import Button from "../Button";
 
-const StyledButton = styled(Button)`
-  border-radius: 0;
-  font-size: 1.2rem;
-  font-weight: 400;
-  padding: 0 10px;
-  height: 30px;
-`;
 const StyledA = styled.a`
   font-size: 1.2rem;
 `;
@@ -61,7 +55,7 @@ function Dropdown() {
           }}
           placement="bottom"
         >
-          <StyledButton>SELECT</StyledButton>
+          <Button>SELECT</Button>
         </DropdownAntd>
       </Space>
     </Space>
