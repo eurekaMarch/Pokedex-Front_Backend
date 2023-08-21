@@ -8,14 +8,23 @@ const StyledDiv = styled.div`
   align-items: center;
 `;
 
-function FilterDropdown(value) {
-  const { label, items } = value;
+function FilterDropdown(values) {
+  const { label, items } = values;
+  const [selectedItem, setSelectedItem] = useState(items[0]);
+
+  const onItemSelect = ({ item }) => {
+    setSelectedItem(item);
+  };
 
   return (
     <StyledDiv>
-      <text>{label}</text>
+      <div>{label}</div>
       <div>
-        <DropdownMenu items={items} />
+        <DropdownMenu
+          data={selectedItem}
+          items={items}
+          onItemSelect={onItemSelect}
+        />
       </div>
     </StyledDiv>
   );

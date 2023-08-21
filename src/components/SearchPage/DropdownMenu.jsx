@@ -41,20 +41,38 @@ import { DownOutlined } from "@ant-design/icons";
 //   },
 // ];
 
-function DropdownMenu(value) {
-  const { items } = value;
+const getTitle = (item) => {
+  if (item.label) return item.label;
+  if (item.value) return item.value;
+
+  return "N/A";
+};
+
+function DropdownMenu(values) {
+  const { items, data, onItemSelect } = values;
+  const title = getTitle(data);
+
+  const handleOnItemSelect = ({ key }) => {
+    const selectedItemss = items.find((i) => i.key === key);
+
+    onItemSelect({
+      value: selectedItemss.value,
+      key: key,
+      item: selectedItemss,
+    });
+  };
+
+  const menuProps = {
+    items,
+    onClick: handleOnItemSelect,
+  };
 
   return (
     <Space direction="vertical">
       <Space wrap>
-        <DropdownAntd
-          menu={{
-            items,
-          }}
-          placement="bottom"
-        >
+        <DropdownAntd menu={menuProps} placement="bottom">
           <Button>
-            SELECT
+            {title}
             <DownOutlined />
           </Button>
         </DropdownAntd>
