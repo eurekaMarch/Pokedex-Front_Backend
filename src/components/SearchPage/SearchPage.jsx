@@ -1,17 +1,32 @@
-import { Image } from "antd";
+import { Image, Col, Row } from "antd";
 import PokeTitle from "../../assets/images/pokedex.png";
 import styled from "styled-components";
-import Dropdown from "./Dropdown";
+import FilterDropdown from "./FilterDropdown";
+import { regions } from "./helper";
 
 const Container = styled.div`
   text-align: center;
 `;
 
 function SearchPage() {
+  const regionDropdownItems = regions.map((r) => {
+    return {
+      ...r,
+      key: r.name,
+      value: r.name,
+      label: `${r.name} (${r.offset} - ${r.limit + r.offset})`,
+    };
+  });
+
   return (
     <Container>
       <Image width={200} src={PokeTitle} />
-      <Dropdown />
+
+      <Row>
+        <Col>
+          <FilterDropdown label="REGION" items={regionDropdownItems} />
+        </Col>
+      </Row>
     </Container>
   );
 }

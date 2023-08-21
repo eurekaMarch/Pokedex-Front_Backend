@@ -33,3 +33,12 @@ body {
     font-size: 50%;
   }
 }
+
+.ant-dropdown-menu {
+  max-height: 200px;
+  overflow: scroll;
+}
+
+.ant-dropdown-menu-title-content {
+  font-size: 1rem;
+}

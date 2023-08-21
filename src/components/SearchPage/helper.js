@@ -1,68 +1,68 @@
 const regions = [
   {
-    name: 'Kanto',
+    name: "Kanto",
     limit: 151,
-    offset: 0
+    offset: 0,
   },
   {
-    name: 'Johto',
+    name: "Johto",
     limit: 100,
-    offset: 151
+    offset: 151,
   },
   {
-    name: 'Hoenn',
+    name: "Hoenn",
     limit: 135,
-    offset: 251
+    offset: 251,
   },
   {
-    name: 'Sinnoh',
+    name: "Sinnoh",
     limit: 108,
-    offset: 386
+    offset: 386,
   },
   {
-    name: 'Unova',
+    name: "Unova",
     limit: 155,
-    offset: 494
+    offset: 494,
   },
   {
-    name: 'Kalos',
+    name: "Kalos",
     limit: 72,
-    offset: 649
+    offset: 649,
   },
   {
-    name: 'Alola',
+    name: "Alola",
     limit: 88,
-    offset: 721
+    offset: 721,
   },
   {
-    name: 'Galar',
+    name: "Galar",
     limit: 89,
-    offset: 809
-  }
+    offset: 809,
+  },
 ];
 
 const types = [
-  'all types',
-  'grass',
-  'bug',
-  'dark',
-  'dragon',
-  'electric',
-  'fairy',
-  'fighting',
-  'fire',
-  'flying',
-  'ghost',
-  'ground',
-  'ice',
-  'normal',
-  'poison',
-  'psychic',
-  'rock',
-  'steel',
-  'water'
+  "all types",
+  "grass",
+  "bug",
+  "dark",
+  "dragon",
+  "electric",
+  "fairy",
+  "fighting",
+  "fire",
+  "flying",
+  "ghost",
+  "ground",
+  "ice",
+  "normal",
+  "poison",
+  "psychic",
+  "rock",
+  "steel",
+  "water",
 ];
 
-const sortby = ['ID', 'Name'];
+const sortby = ["ID", "Name"];
 
 export { regions, types, sortby };
