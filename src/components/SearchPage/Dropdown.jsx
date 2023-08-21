@@ -1,5 +1,4 @@
-import { Dropdown as DropdownAntd, Space } from "antd";
-import Button from "../Button";
+import { Dropdown as DropdownAntd, Space, Button } from "antd";
 
 const mocMenu = [
   {
@@ -22,10 +21,9 @@ const mocMenu = [
         rel="noopener noreferrer"
         href="https://www.aliyun.com"
       >
-        2nd menu item (disabled)
+        2nd menu item
       </a>
     ),
-    disabled: true,
   },
   {
     key: "3",
@@ -35,25 +33,26 @@ const mocMenu = [
         rel="noopener noreferrer"
         href="https://www.luohanacademy.com"
       >
-        3rd menu item (disabled)
+        3rd menu item
       </a>
     ),
-    disabled: true,
-  },
-  {
-    key: "4",
-    danger: true,
-    label: "a danger item",
   },
 ];
 
 function Dropdown() {
   return (
-    <DropdownAntd menu={{ mocMenu }}>
-      <div onClick={(e) => e.preventDefault()}>
-        <Space>Hover me</Space>
-      </div>
-    </DropdownAntd>
+    <Space direction="vertical">
+      <Space wrap>
+        <DropdownAntd
+          menu={{
+            mocMenu,
+          }}
+          placement="bottom"
+        >
+          <Button>bottom</Button>
+        </DropdownAntd>
+      </Space>
+    </Space>
   );
 }
 
