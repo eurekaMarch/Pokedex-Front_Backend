@@ -1,40 +1,52 @@
 import { Dropdown as DropdownAntd, Space, Button } from "antd";
+import styled from "styled-components";
 
-const mocMenu = [
+const StyledButton = styled(Button)`
+  border-radius: 0;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 0 10px;
+  height: 30px;
+`;
+const StyledA = styled.a`
+  font-size: 1.2rem;
+`;
+
+const items = [
   {
     key: "1",
     label: (
-      <a
+      <StyledA
         target="_blank"
         rel="noopener noreferrer"
         href="https://www.antgroup.com"
       >
         1st menu item
-      </a>
+      </StyledA>
     ),
   },
   {
     key: "2",
     label: (
-      <a
+      <StyledA
         target="_blank"
         rel="noopener noreferrer"
         href="https://www.aliyun.com"
       >
         2nd menu item
-      </a>
+      </StyledA>
     ),
   },
   {
     key: "3",
     label: (
-      <a
+      <StyledA
         target="_blank"
         rel="noopener noreferrer"
         href="https://www.luohanacademy.com"
       >
         3rd menu item
-      </a>
+      </StyledA>
     ),
   },
 ];
@@ -45,11 +57,11 @@ function Dropdown() {
       <Space wrap>
         <DropdownAntd
           menu={{
-            mocMenu,
+            items,
           }}
           placement="bottom"
         >
-          <Button>bottom</Button>
+          <StyledButton>SELECT</StyledButton>
         </DropdownAntd>
       </Space>
     </Space>
