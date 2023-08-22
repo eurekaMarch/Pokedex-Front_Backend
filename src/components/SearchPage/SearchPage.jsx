@@ -7,6 +7,7 @@ import Search from "./Search";
 
 const Container = styled.div`
   text-align: center;
+  margin-top: 2rem;
 `;
 
 const StyledRow = styled(Row)`
