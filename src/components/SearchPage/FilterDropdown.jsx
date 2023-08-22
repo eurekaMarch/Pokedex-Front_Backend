@@ -6,6 +6,16 @@ const StyledDiv = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: center;
+  font-size: 1rem;
+
+  .dropdown-wrapper {
+    margin-top: 1rem;
+  }
+`;
+
+const StyledSpan = styled.span`
+    margin-top: 0;
+  }
 `;
 
 function FilterDropdown(values) {
@@ -18,8 +28,8 @@ function FilterDropdown(values) {
 
   return (
     <StyledDiv>
-      <div>{label}</div>
-      <div>
+      <StyledSpan>{label}</StyledSpan>
+      <div className="dropdown-wrapper">
         <DropdownMenu
           data={selectedItem}
           items={items}
