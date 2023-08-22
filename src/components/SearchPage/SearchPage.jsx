@@ -5,6 +5,8 @@ import styled from "styled-components";
 import FilterDropdown from "./FilterDropdown";
 import { regions, types, sortby } from "./helper";
 import Search from "./Search";
+import { pokemonInfo } from "../../utils/pokemonInfo";
+import PokemonCard from "./PokemonCard";
 
 const Container = styled.div`
   text-align: center;
@@ -21,6 +23,13 @@ const StyledRow = styled(Row)`
 
 const StyledCol = styled(Col)`
   font-size: 1rem;
+`;
+
+const PokemonContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 2rem;
 `;
 
 const regionDropdownItems = regions.map((r) => {
@@ -97,11 +106,17 @@ function SearchPage() {
         <StyledCol xs={24} sm={12} md={6}>
           <Search
             label="SEARCH"
-            placeholder="TYPING"
+            placeholder="TYPING . . ."
             onChange={(v) => onFilterChange("search", v)}
           />
         </StyledCol>
       </StyledRow>
+
+      <PokemonContainer>
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
+          <PokemonCard key={x} pokemon={pokemonInfo} />
+        ))}
+      </PokemonContainer>
     </Container>
   );
 }
