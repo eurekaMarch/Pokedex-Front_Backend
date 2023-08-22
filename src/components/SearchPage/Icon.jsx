@@ -18,13 +18,17 @@ function Icon() {
     setActive2(!active2);
     console.log("hi555");
   };
+
   return (
     <div>
       <StyledIcon
         onClick={toggle}
         style={{ color: active ? "#da7589" : "currentColor" }}
       />
-      <InfoCircleFilled onClick={toggle2} />
+      <InfoCircleFilled
+        onClick={toggle2}
+        style={{ color: active2 ? "#da7589" : "currentColor" }}
+      />
     </div>
   );
 }
