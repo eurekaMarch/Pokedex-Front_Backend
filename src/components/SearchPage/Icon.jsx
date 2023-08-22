@@ -7,25 +7,25 @@ const StyledIcon = styled(HeartFilled)`
 `;
 
 function Icon() {
-  const [active, setActive] = useState(false);
-  const [active2, setActive2] = useState(false);
+  const [changeColor, setChangeColor] = useState(false);
+  const [changePage, setChangePage] = useState(false);
 
-  const toggle = () => {
-    setActive(!active);
+  const handleOnchangeColor = () => {
+    setChangeColor(!changeColor);
     console.log("hi444");
   };
-  const toggle2 = () => {
-    setActive2(!active2);
+  const handleOnChangePage = () => {
+    setChangePage(!changePage);
     console.log("hi555");
   };
 
   return (
     <div>
       <StyledIcon
-        onClick={toggle}
-        style={{ color: active ? "#da7589" : "currentColor" }}
+        onClick={handleOnchangeColor}
+        style={{ color: changeColor ? "#da7589" : "currentColor" }}
       />
-      <InfoCircleFilled onClick={toggle2} />
+      <InfoCircleFilled onClick={handleOnChangePage} />
     </div>
   );
 }
