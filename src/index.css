@@ -43,4 +43,5 @@ body {
 
 .ant-dropdown-menu-title-content {
   font-size: 1rem;
+  border-radius: 0;
 }
