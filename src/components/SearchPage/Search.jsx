@@ -19,11 +19,12 @@ const StyledSpan = styled.span`
 `;
 
 function Search(prop) {
-  const { label, placeholder } = prop;
+  const { label, placeholder, onChange } = prop;
   const [value, setValue] = useState("");
 
   const onSeachChange = (value) => {
     setValue(value);
+    onChange?.(value);
   };
 
   return (

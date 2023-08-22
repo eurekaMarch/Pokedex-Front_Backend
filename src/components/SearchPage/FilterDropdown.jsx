@@ -1,5 +1,5 @@
 import DropdownMenu from "./DropdownMenu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { styled } from "styled-components";
 
 const StyledDiv = styled.div`
@@ -19,12 +19,20 @@ const StyledSpan = styled.span`
 `;
 
 function FilterDropdown(values) {
-  const { label, items } = values;
+  const { label, items, onChange } = values;
   const [selectedItem, setSelectedItem] = useState(items[0]);
 
   const onItemSelect = ({ item }) => {
     setSelectedItem(item);
+    onChange?.(item);
   };
+
+  useEffect(() => {
+    if (!items) return;
+
+    const defaultItem = items[0];
+    onItemSelect({ item: defaultItem });
+  }, [items]);
 
   return (
     <StyledDiv>

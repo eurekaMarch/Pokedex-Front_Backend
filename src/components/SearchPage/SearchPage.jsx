@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Image, Col, Row } from "antd";
 import PokeTitle from "../../assets/images/pokedex.png";
 import styled from "styled-components";
@@ -22,31 +23,50 @@ const StyledCol = styled(Col)`
   font-size: 1rem;
 `;
 
+const regionDropdownItems = regions.map((r) => {
+  return {
+    ...r,
+    key: r.name,
+    value: r.name,
+    label: `${r.name} (${r.offset} - ${r.limit + r.offset})`,
+  };
+});
+
+const typeDropdownItems = types.map((t) => {
+  return {
+    key: t,
+    value: t,
+    label: t,
+  };
+});
+
+const sortbyDropdownItems = sortby.map((s) => {
+  return {
+    key: s,
+    value: s,
+    label: s,
+  };
+});
+
+const getFertchPokemonFilters = (filters) => {
+  return filters;
+};
+
 function SearchPage() {
-  const regionDropdownItems = regions.map((r) => {
-    return {
-      ...r,
-      key: r.name,
-      value: r.name,
-      label: `${r.name} (${r.offset} - ${r.limit + r.offset})`,
-    };
-  });
+  const [filters, setFilters] = useState({});
 
-  const typeDropdownItems = types.map((t) => {
-    return {
-      key: t,
-      value: t,
-      label: t,
-    };
-  });
+  const onFilterChange = (key, value) => {
+    setFilters((prevFilter) => {
+      return {
+        ...prevFilter,
+        [key]: value,
+      };
+    });
+  };
 
-  const sortbyDropdownItems = sortby.map((s) => {
-    return {
-      key: s,
-      value: s,
-      label: s,
-    };
-  });
+  const pokemonFilters = getFertchPokemonFilters(filters);
+
+  console.log({ pokemonFilters });
 
   return (
     <Container>
@@ -54,16 +74,32 @@ function SearchPage() {
 
       <StyledRow>
         <Col xs={24} sm={12} md={6}>
-          <FilterDropdown label="REGION" items={regionDropdownItems} />
+          <FilterDropdown
+            label="REGION"
+            items={regionDropdownItems}
+            onChange={(item) => onFilterChange("region", item)}
+          />
         </Col>
         <Col xs={24} sm={12} md={6}>
-          <FilterDropdown label="TYPE" items={typeDropdownItems} />
+          <FilterDropdown
+            label="TYPE"
+            items={typeDropdownItems}
+            onChange={(item) => onFilterChange("type", item)}
+          />
         </Col>
         <Col xs={24} sm={12} md={6}>
-          <FilterDropdown label="SORT BY" items={sortbyDropdownItems} />
+          <FilterDropdown
+            label="SORT BY"
+            items={sortbyDropdownItems}
+            onChange={(item) => onFilterChange("sortBy", item)}
+          />
         </Col>
         <StyledCol xs={24} sm={12} md={6}>
-          <Search label="SEARCH" placeholder="TYPING" />
+          <Search
+            label="SEARCH"
+            placeholder="TYPING"
+            onChange={(v) => onFilterChange("search", v)}
+          />
         </StyledCol>
       </StyledRow>
     </Container>
