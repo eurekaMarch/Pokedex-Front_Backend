@@ -25,10 +25,7 @@ function Icon() {
         onClick={toggle}
         style={{ color: active ? "#da7589" : "currentColor" }}
       />
-      <InfoCircleFilled
-        onClick={toggle2}
-        style={{ color: active2 ? "#da7589" : "currentColor" }}
-      />
+      <InfoCircleFilled onClick={toggle2} />
     </div>
   );
 }
