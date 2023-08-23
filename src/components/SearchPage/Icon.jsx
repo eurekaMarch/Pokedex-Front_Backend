@@ -22,10 +22,11 @@ function Icon(prop) {
   };
 
   const handleOnChangePage = () => {
-    navigate(`/pokemon?id=${pokemon.id}`);
+    // can go back page
+    // navigate(`/pokemon?id=${pokemon.id}`);
 
     // don't go back page
-    // navigate(`/pokemon?id=${pokemon.id}`, { replace: true });
+    navigate(`/pokemon?id=${pokemon.id}`, { replace: true });
   };
 
   return (

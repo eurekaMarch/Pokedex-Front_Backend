@@ -7,14 +7,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import SearchPage from "./components/SearchPage/SearchPage";
-import PokemonInfo from "./components/PokemonInfo/PokemonInfo";
+import PokemonInfoPage from "./components/PokemonInfoPage/PokemonInfoPage";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         <Route path="/" element={<SearchPage />} />
-        <Route path="/pokemon" element={<PokemonInfo />} />
+        <Route path="/pokemon" element={<PokemonInfoPage />} />
       </Route>
     )
   );
