@@ -113,9 +113,10 @@ function SearchPage() {
       </StyledRow>
 
       <PokemonContainer>
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
-          <PokemonCard key={x} pokemon={pokemonInfo} />
-        ))}
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => {
+          return <PokemonCard key={x} pokemon={pokemonInfo} />;
+        })}
+        ;
       </PokemonContainer>
     </Container>
   );

@@ -42,7 +42,7 @@ function PokemonCard(prop) {
       <StyledCard bgcolor={bgColors} hoverable>
         <StyledHeader>
           <span>#{pokemon?.id}</span>
-          <Icon />
+          <Icon pokemon={pokemon} />
         </StyledHeader>
         <StyledImage>
           <img src={pokemon?.images} width={"100%"} />
