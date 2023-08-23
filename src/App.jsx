@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import SearchPage from "./components/SearchPage/SearchPage";
-import PokemonInfo from "./components/PokemonInfo";
+import PokemonInfo from "./components/PokemonInfo/PokemonInfo";
 
 function App() {
   const router = createBrowserRouter(
