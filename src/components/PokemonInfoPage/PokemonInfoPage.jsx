@@ -22,7 +22,7 @@ const StyledRow = styled(Row)`
   align-items: center;
   border-radius: 1rem;
   max-width: 80rem;
-  padding-top: 2rem;
+  padding: 2rem 0rem 0rem;
 `;
 const StyledCol = styled(Col)`
   display: flex;
