@@ -35,6 +35,7 @@ function Icon(prop) {
         style={{ color: active ? "#da7589" : "currentColor" }}
       />
       <InfoCircleFilled onClick={handleOnChangePage} />
+
       {/* <Link to={`/pokemon?id=${pokemon.id}`}>
         <InfoCircleFilled style={{ color: "rgba(0, 0, 0, 0.88)" }} />
       </Link> */}
