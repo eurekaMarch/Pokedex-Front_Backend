@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Image, Col, Row } from "antd";
 import PokeTitle from "../../assets/images/pokedex.png";
 import styled from "styled-components";
 import FilterDropdown from "./FilterDropdown";
 import { regions, types, sortby } from "./helper";
 import Search from "./Search";
-import { pokemonInfo } from "../../utils/pokemonInfo";
 import PokemonCard from "./PokemonCard";
+import { pokemonApiV2 } from "../../utils/Axios";
+// import { pokemonInfo } from "../../utils/pokemonInfo";
 
 const Container = styled.div`
   text-align: center;
@@ -35,9 +36,9 @@ const PokemonContainer = styled.div`
 const regionDropdownItems = regions.map((r) => {
   return {
     ...r,
-    key: r.name,
-    value: r.name,
-    label: `${r.name} (${r.offset} - ${r.limit + r.offset})`,
+    key: r?.name,
+    value: r?.name,
+    label: `${r?.name} (${r?.offset} - ${r?.limit + r?.offset})`,
   };
 });
 
@@ -61,8 +62,37 @@ const getFertchPokemonFilters = (filters) => {
   return filters;
 };
 
+const getQueryString = (region) => {
+  if (!region) return null;
+
+  let query = new URLSearchParams();
+
+  query.append("limit", region?.limit);
+  query.append("offset", region?.offset);
+
+  return query.toString();
+};
+
+const getPokemonLists = (pokemons = [], filters = {}) => {
+  const result = pokemons.map((pokemon) => {
+    return {
+      ...pokemon,
+      image: pokemon?.sprites?.other?.dream_world?.front_default,
+    };
+  });
+
+  return result;
+};
+
+const initial = {
+  data: [],
+  loading: false,
+  error: null,
+};
+
 function SearchPage() {
   const [filters, setFilters] = useState({});
+  const [state, setState] = useState(initial);
 
   const onFilterChange = (key, value) => {
     setFilters((prevFilter) => {
@@ -73,9 +103,48 @@ function SearchPage() {
     });
   };
 
+  const queryString = getQueryString(filters.region);
+  const pokemonLists = getPokemonLists(state?.data, filters);
+
   const pokemonFilters = getFertchPokemonFilters(filters);
 
-  console.log({ pokemonFilters });
+  const fetchPokemonList = async () => {
+    if (!queryString) return;
+
+    let pokemonList = [];
+    let fetchError = null;
+
+    setState((prev) => ({
+      ...prev,
+      loading: true,
+    }));
+
+    try {
+      const response = await pokemonApiV2.get(`pokemon?${queryString}`);
+      const pokemonResults = response?.data?.results || [];
+
+      for (let pokemon of pokemonResults) {
+        const response = await pokemonApiV2.get(`pokemon/${pokemon?.name}`);
+        const monster = await response?.data;
+        await pokemonList.push(monster);
+      }
+    } catch (error) {
+      fetchError = error;
+    }
+
+    setState((prev) => ({
+      ...prev,
+      loading: false,
+      data: pokemonList,
+      error: fetchError,
+    }));
+  };
+
+  console.log({ state });
+
+  useEffect(() => {
+    queryString && fetchPokemonList();
+  }, [queryString]);
 
   return (
     <Container>
@@ -113,11 +182,16 @@ function SearchPage() {
       </StyledRow>
 
       <PokemonContainer>
+        {[...pokemonLists].map((pokemon) => {
+          return <PokemonCard key={pokemon?.id} pokemon={pokemon} />;
+        })}
+      </PokemonContainer>
+
+      {/* <PokemonContainer>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => {
           return <PokemonCard key={x} pokemon={pokemonInfo} />;
         })}
-        ;
-      </PokemonContainer>
+      </PokemonContainer> */}
     </Container>
   );
 }

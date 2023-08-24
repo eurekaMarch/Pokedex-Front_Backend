@@ -13,7 +13,7 @@ const StyledImage = styled.div`
 `;
 
 const StyledCard = styled(Card)`
-  width: 22rem;
+  width: 26rem;
   padding: 1rem;
   border-radius: 0.5rem;
   background: ${({ bgcolor }) =>
@@ -30,10 +30,12 @@ const StyledHeader = styled.header`
   font-size: 1.2rem;
 `;
 
-const StyledSpan = styled.span``;
+const StyledSpan = styled.span`
+  font-size: 1rem;
+`;
 
-function PokemonCard(prop) {
-  const { pokemon } = prop;
+function PokemonCard(value) {
+  const { pokemon } = value;
 
   const bgColors = getCardColorsByPokemonTypes(pokemon?.types);
 
@@ -45,7 +47,7 @@ function PokemonCard(prop) {
           <Icon pokemon={pokemon} />
         </StyledHeader>
         <StyledImage>
-          <img src={pokemon?.images} width={"100%"} />
+          <img src={pokemon?.image} width={"100%"} height={"162rem"} />
         </StyledImage>
         <StyledSpan>{pokemon?.name}</StyledSpan>
       </StyledCard>
