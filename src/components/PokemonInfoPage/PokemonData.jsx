@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Col, Row } from "antd";
 
 const DataWrapper = styled.div`
-  padding: 1rem;
+  padding: 0;
 
   span {
     font-size: 1rem;

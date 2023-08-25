@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
-import { Image, Col, Row } from "antd";
+import { Image, Col, Row, Spin } from "antd";
 import PokeTitle from "../../assets/images/pokedex.png";
 import styled from "styled-components";
 import FilterDropdown from "./FilterDropdown";
-import { regions, types, sortby } from "./helper";
+import {
+  regions,
+  types,
+  sortby,
+  filterBySearch,
+  filterByType,
+  sortingBy,
+} from "./helper";
 import Search from "./Search";
 import PokemonCard from "./PokemonCard";
 import { pokemonApiV2 } from "../../utils/Axios";
+import { filter } from "lodash";
 // import { pokemonInfo } from "../../utils/pokemonInfo";
 
 const Container = styled.div`
@@ -58,10 +66,6 @@ const sortbyDropdownItems = sortby.map((s) => {
   };
 });
 
-const getFertchPokemonFilters = (filters) => {
-  return filters;
-};
-
 const getQueryString = (region) => {
   if (!region) return null;
 
@@ -74,7 +78,29 @@ const getQueryString = (region) => {
 };
 
 const getPokemonLists = (pokemons = [], filters = {}) => {
-  const result = pokemons.map((pokemon) => {
+  const { search, type, sortBy } = filters;
+
+  const pokemonLists = filter(pokemons, (pokemon) => {
+    let remove = false;
+
+    if (search && !filterBySearch(pokemon, search)) {
+      remove = true;
+    }
+
+    if (
+      type &&
+      type?.value !== "all types" &&
+      !filterByType(pokemon, type?.value)
+    ) {
+      remove = true;
+    }
+
+    return !remove;
+  });
+
+  const sortedPokemonList = pokemonLists.sort(sortingBy(sortBy?.value));
+
+  const result = sortedPokemonList.map((pokemon) => {
     return {
       ...pokemon,
       image: pokemon?.sprites?.other?.dream_world?.front_default,
@@ -105,8 +131,6 @@ function SearchPage() {
 
   const queryString = getQueryString(filters.region);
   const pokemonLists = getPokemonLists(state?.data, filters);
-
-  const pokemonFilters = getFertchPokemonFilters(filters);
 
   const fetchPokemonList = async () => {
     if (!queryString) return;
@@ -139,8 +163,6 @@ function SearchPage() {
       error: fetchError,
     }));
   };
-
-  console.log({ state });
 
   useEffect(() => {
     queryString && fetchPokemonList();
@@ -182,9 +204,13 @@ function SearchPage() {
       </StyledRow>
 
       <PokemonContainer>
-        {[...pokemonLists].map((pokemon) => {
-          return <PokemonCard key={pokemon?.id} pokemon={pokemon} />;
-        })}
+        {state.loading ? (
+          <Spin />
+        ) : (
+          [...pokemonLists].map((pokemon) => {
+            return <PokemonCard key={pokemon?.id} pokemon={pokemon} />;
+          })
+        )}
       </PokemonContainer>
 
       {/* <PokemonContainer>
