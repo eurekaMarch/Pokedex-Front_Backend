@@ -1,12 +1,14 @@
-import { useSearchParams } from "react-router-dom";
-import { Col, Row, Card } from "antd";
+import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { Col, Row, Card, Spin } from "antd";
 import styled from "styled-components";
 import { getCardColorsByPokemonTypes } from "../../utils/pokemon";
 import { pokemonInfo } from "../../utils/pokemonInfo";
 import PokemonInfor from "./PokemonInfor";
 import PokemonData from "./PokemonData";
 import { BackwardFilled } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { isEmpty } from "lodash";
+import { pokemonApiV2 } from "../../utils/Axios";
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,17 +43,63 @@ const StyledCol1 = styled(Col)`
   display: flex;
   justify-content: center;
 `;
+
 const StyledCol2 = styled(Col)`
   padding: 0 1rem 1rem;
 `;
 
+const initial = {
+  data: {},
+  loading: false,
+  error: null,
+};
+
 function PokemonInfoPage() {
+  const [state, setState] = useState(initial);
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
 
-  const bgColors = getCardColorsByPokemonTypes(pokemonInfo?.types);
+  const fetchPokemon = async (id) => {
+    setState((prev) => ({
+      ...prev,
+      loading: true,
+    }));
 
-  const navigate = useNavigate();
+    let pokemon;
+    let fetchError;
+
+    try {
+      const pokemonResponse = await pokemonApiV2.get(`pokemon/${id}`);
+      const speciesResposne = await pokemonApiV2.get(`pokemon-species/${id}`);
+
+      pokemon = await pokemonResponse?.data;
+      let species = await speciesResposne?.data;
+
+      pokemon = {
+        ...pokemon,
+        image: pokemon?.sprites?.other?.dream_world?.front_default,
+        about: species?.flavor_text_entries?.[0]?.flavor_text,
+      };
+    } catch (error) {
+      fetchError = error;
+    }
+
+    setState((prev) => ({
+      ...prev,
+      data: pokemon,
+      loading: false,
+      error: fetchError,
+    }));
+  };
+
+  useEffect(() => {
+    id && fetchPokemon(id);
+  }, [id]);
+
+  if (!state.data || isEmpty(state.data)) return;
+
+  const bgColors = getCardColorsByPokemonTypes(pokemonInfo?.types);
 
   const goBack = () => {
     navigate("/", { replace: true });
@@ -60,15 +108,21 @@ function PokemonInfoPage() {
   return (
     <Wrapper>
       <StyledCard bgcolor={bgColors} hoverable>
-        <StyledBackward onClick={goBack} />
-        <StyledRow>
-          <StyledCol1 xs={24} sm={12} md={8}>
-            <PokemonInfor pokemon={pokemonInfo} />
-          </StyledCol1>
-          <StyledCol2 xs={24} sm={12} md={16}>
-            <PokemonData pokemon={pokemonInfo} />
-          </StyledCol2>
-        </StyledRow>
+        {state.loading ? (
+          <Spin />
+        ) : (
+          <div>
+            <StyledBackward onClick={goBack} />
+            <StyledRow>
+              <StyledCol1 xs={24} sm={12} md={9}>
+                <PokemonInfor pokemon={state.data} />
+              </StyledCol1>
+              <StyledCol2 xs={24} sm={12} md={15}>
+                <PokemonData pokemon={state.data} />
+              </StyledCol2>
+            </StyledRow>
+          </div>
+        )}
       </StyledCard>
     </Wrapper>
   );

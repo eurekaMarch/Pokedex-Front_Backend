@@ -27,7 +27,7 @@ function PokemonData(prop) {
     <DataWrapper>
       <span>About</span>
       <div>
-        <Content>{pokemon?.flavor_text_entries[0].flavor_text_entries}</Content>
+        <Content>{pokemon?.about}</Content>
       </div>
       <span>Abilities</span>
       <Content>
