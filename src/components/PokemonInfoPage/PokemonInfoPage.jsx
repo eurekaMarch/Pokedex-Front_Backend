@@ -3,7 +3,6 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { Col, Row, Card, Spin } from "antd";
 import styled from "styled-components";
 import { getCardColorsByPokemonTypes } from "../../utils/pokemon";
-import { pokemonInfo } from "../../utils/pokemonInfo";
 import PokemonInfor from "./PokemonInfor";
 import PokemonData from "./PokemonData";
 import { BackwardFilled } from "@ant-design/icons";
@@ -99,7 +98,7 @@ function PokemonInfoPage() {
 
   if (!state.data || isEmpty(state.data)) return;
 
-  const bgColors = getCardColorsByPokemonTypes(pokemonInfo?.types);
+  const bgColors = getCardColorsByPokemonTypes(state.data.types);
 
   const goBack = () => {
     navigate("/", { replace: true });
