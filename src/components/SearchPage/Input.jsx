@@ -11,18 +11,14 @@ const StyledInput = styled(InputAntd)`
 `;
 
 function Input(prop) {
-  const { value, onSeachChange, placeholder } = prop;
+  const { onSeachChange, placeholder } = prop;
   const handleOnInputChange = (e) => {
     const value = e.target.value;
     onSeachChange(value);
   };
 
   return (
-    <StyledInput
-      placeholder={placeholder}
-      value={value}
-      onChange={handleOnInputChange}
-    />
+    <StyledInput placeholder={placeholder} onChange={handleOnInputChange} />
   );
 }
 

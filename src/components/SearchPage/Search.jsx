@@ -20,10 +20,10 @@ const StyledSpan = styled.span`
 
 function Search(prop) {
   const { label, placeholder, onChange } = prop;
-  const [value, setValue] = useState("");
+  const [values, setValues] = useState("");
 
   const onSeachChange = (value) => {
-    setValue(value);
+    setValues(value);
     onChange?.(value);
   };
 
@@ -34,7 +34,7 @@ function Search(prop) {
         <Input
           placeholder={placeholder}
           onSeachChange={onSeachChange}
-          value={value}
+          value={values}
         />
       </div>
     </StyledDiv>

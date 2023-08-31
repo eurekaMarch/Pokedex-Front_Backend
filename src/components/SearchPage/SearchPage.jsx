@@ -81,6 +81,7 @@ const getPokemonLists = (pokemons = [], filters = {}) => {
   const { search, type, sortBy } = filters;
 
   const pokemonLists = filter(pokemons, (pokemon) => {
+    //filter ของ lodash
     let remove = false;
 
     if (search && !filterBySearch(pokemon, search)) {
@@ -117,11 +118,11 @@ const initial = {
 };
 
 function SearchPage() {
-  const [filters, setFilters] = useState({});
+  const [filterS, setFilterS] = useState({});
   const [state, setState] = useState(initial);
 
   const onFilterChange = (key, value) => {
-    setFilters((prevFilter) => {
+    setFilterS((prevFilter) => {
       return {
         ...prevFilter,
         [key]: value,
@@ -129,8 +130,8 @@ function SearchPage() {
     });
   };
 
-  const queryString = getQueryString(filters.region);
-  const pokemonLists = getPokemonLists(state?.data, filters);
+  const queryString = getQueryString(filterS.region);
+  const pokemonLists = getPokemonLists(state?.data, filterS);
 
   const fetchPokemonList = async () => {
     if (!queryString) return;

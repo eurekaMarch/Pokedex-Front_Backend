@@ -1,5 +1,4 @@
 import Icon from "./Icon";
-
 import { Card } from "antd";
 import styled from "styled-components";
 import { getCardColorsByPokemonTypes } from "../../utils/pokemon";
