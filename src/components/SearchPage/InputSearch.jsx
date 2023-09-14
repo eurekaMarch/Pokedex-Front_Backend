@@ -10,7 +10,7 @@ const StyledInput = styled(InputAntd)`
   border-radius: 0;
 `;
 
-function Input(prop) {
+function InputSearch(prop) {
   const { onSeachChange, placeholder } = prop;
   const handleOnInputChange = (e) => {
     const value = e.target.value;
@@ -22,4 +22,4 @@ function Input(prop) {
   );
 }
 
-export default Input;
+export default InputSearch;

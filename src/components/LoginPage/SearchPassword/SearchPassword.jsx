@@ -1,4 +1,4 @@
-import Input from "./InputSearch";
+import Input from "./InputPassword";
 import { useState } from "react";
 import { styled } from "styled-components";
 
@@ -6,6 +6,7 @@ const StyledDiv = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: center;
+  font-family: "barcadebrawl", sans-serif;
 
   .search-wrapper {
     margin-top: 1rem;
@@ -18,7 +19,7 @@ const StyledSpan = styled.span`
   }
 `;
 
-function Search(prop) {
+function SearchPassword(prop) {
   const { label, placeholder, onChange } = prop;
   const [values, setValues] = useState("");
 
@@ -41,4 +42,4 @@ function Search(prop) {
   );
 }
 
-export default Search;
+export default SearchPassword;
