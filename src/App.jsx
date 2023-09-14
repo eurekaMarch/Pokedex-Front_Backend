@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import SearchPage from "./components/SearchPage/SearchPage";
 import PokemonInfoPage from "./components/PokemonInfoPage/PokemonInfoPage";
+import LoginPage from "./components/LoginPage/LoginPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -15,6 +16,7 @@ function App() {
       <Route>
         <Route path="/" element={<SearchPage />} />
         <Route path="/pokemon" element={<PokemonInfoPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Route>
     )
   );
