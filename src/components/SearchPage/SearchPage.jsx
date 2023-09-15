@@ -22,6 +22,25 @@ const Container = styled.div`
   margin-top: 2rem;
 `;
 
+const HeaderContainer = styled.div`
+  position: relative;
+`;
+const RightMenu = styled.div`
+  position: absolute;
+  top: 24px;
+  right: 0;
+  display: flex;
+  gap: 10px;
+`;
+
+const Link = styled.span`
+  color: gray;
+  cursor: pointer;
+  &:hover {
+    color: blue;
+  }
+`;
+
 const StyledRow = styled(Row)`
   max-width: 1000px;
   margin: auto;
@@ -117,7 +136,8 @@ const initial = {
   error: null,
 };
 
-function SearchPage() {
+function SearchPage(prop) {
+  const { clearToken, user } = prop;
   const [filterS, setFilterS] = useState({});
   const [state, setState] = useState(initial);
 
@@ -171,7 +191,13 @@ function SearchPage() {
 
   return (
     <Container>
-      <Image width={200} src={PokeTitle} />
+      <HeaderContainer>
+        <Image width={200} src={PokeTitle} />
+        <RightMenu>
+          <div>{user.firstName}</div>
+          <Link onClick={clearToken}>logout</Link>
+        </RightMenu>
+      </HeaderContainer>
 
       <StyledRow>
         <Col xs={24} sm={12} md={6}>
@@ -203,7 +229,6 @@ function SearchPage() {
           />
         </StyledCol>
       </StyledRow>
-
       <PokemonContainer>
         {state.loading ? (
           <Spin />
@@ -213,7 +238,6 @@ function SearchPage() {
           })
         )}
       </PokemonContainer>
-
       {/* <PokemonContainer>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => {
           return <PokemonCard key={x} pokemon={pokemonInfo} />;

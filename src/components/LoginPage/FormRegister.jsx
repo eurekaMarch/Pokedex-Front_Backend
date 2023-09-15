@@ -31,7 +31,7 @@ const Link = styled.span`
 `;
 
 function FormRegister(values) {
-  const { onSetStagePage, onRegister } = values;
+  const { onSetStagePage, onRegister, onClearError } = values;
 
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -44,23 +44,35 @@ function FormRegister(values) {
       <Search
         label="first name"
         placeholder="firstname"
-        onChange={(v) => setFirstname(v)}
+        onChange={(v) => {
+          setFirstname(v);
+          onClearError();
+        }}
       />
       <Search
         label="last name"
         placeholder="lastname"
-        onChange={(v) => setLastname(v)}
+        onChange={(v) => {
+          setLastname(v);
+          onClearError();
+        }}
       />
       <Search
         label="username"
         placeholder="username"
-        onChange={(v) => setUsername(v)}
+        onChange={(v) => {
+          setUsername(v);
+          onClearError();
+        }}
       />
       <SearchPassword
         label="password"
         placeholder="password"
         password="Password"
-        onChange={(v) => setPassword(v)}
+        onChange={(v) => {
+          setPassword(v);
+          onClearError();
+        }}
       />
       <StyledButton
         onClick={() =>
