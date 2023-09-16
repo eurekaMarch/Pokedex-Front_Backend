@@ -19,9 +19,9 @@ function useToken() {
     let userData = JSON.parse(userString);
 
     if (userToken) {
-      return { useToken, userData };
+      return { userToken, userData };
     } else {
-      return { useToken: "", userData: "" };
+      return { userToken: "", userData: "" };
     }
   };
 
@@ -32,7 +32,7 @@ function useToken() {
     setUser("");
   };
 
-  const [token, setToken] = useState(getToken().useToken);
+  const [token, setToken] = useState(getToken().userToken);
   const [user, setUser] = useState(getToken().userData);
 
   return { token, saveToken, clearToken, user, saveUser };
