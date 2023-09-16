@@ -1,4 +1,5 @@
 import { useState } from "react";
+import jwt_decode from "jwt-decode";
 
 function useToken() {
   const saveToken = (tokenData) => {
@@ -19,6 +20,15 @@ function useToken() {
     let userData = JSON.parse(userString);
 
     if (userToken) {
+      let decoded = jwt_decode(userToken);
+      let currenTime = Math.floor(new Date().getTime() / 1000);
+
+      if (decoded.exp - currenTime <= 0) {
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("user");
+        return { userToken: "", userData: "" };
+      }
+
       return { userToken, userData };
     } else {
       return { userToken: "", userData: "" };
