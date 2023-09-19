@@ -1,3 +1,4 @@
+// import { useState } from "react";
 import {
   useNavigate,
   // Link,
@@ -24,7 +25,13 @@ const Score = styled.span`
 function Icon(prop) {
   const { pokemon, onvote } = prop;
 
+  // const [active, setActive] = useState(false);
+
   const navigate = useNavigate();
+
+  // const handleOnchangeColor = () => {
+  //   setActive(!active);
+  // };
 
   const handleOnChangePage = () => {
     // can go back page
@@ -35,7 +42,7 @@ function Icon(prop) {
   };
 
   const checkScore = (score) => {
-    return score > 1000 ? `${score / 1000}K` : score;
+    return score >= 1000 ? `${score / 1000}K` : score;
   };
 
   return (
@@ -46,12 +53,23 @@ function Icon(prop) {
         style={{ color: pokemon.score > 0 ? "#da7589" : "currentColor" }}
       />
       <InfoCircleFilled onClick={handleOnChangePage} />
-
-      {/* <Link to={`/pokemon?id=${pokemon.id}`}>
-        <InfoCircleFilled style={{ color: "rgba(0, 0, 0, 0.88)" }} />
-      </Link> */}
     </Container>
   );
+
+  // return (
+  //   <Container>
+  //     <Score>{pokemon.score}</Score>
+  //     <StyledIcon
+  //       onClick={handleOnchangeColor}
+  //       style={{ color: active ? "#da7589" : "currentColor" }}
+  //     />
+  //     <InfoCircleFilled onClick={handleOnChangePage} />
+
+  //     {/* <Link to={`/pokemon?id=${pokemon.id}`}>
+  //       <InfoCircleFilled style={{ color: "rgba(0, 0, 0, 0.88)" }} />
+  //     </Link> */}
+  //   </Container>
+  // );
 }
 
 export default Icon;
