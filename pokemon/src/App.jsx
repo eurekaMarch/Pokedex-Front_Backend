@@ -23,7 +23,13 @@ function App() {
       <Route>
         <Route
           path="/"
-          element={<SearchPage clearToken={clearToken} user={user} />}
+          element={
+            <SearchPage
+              clearToken={clearToken}
+              user={user}
+              saveToken={saveToken}
+            />
+          }
         />
         <Route path="/pokemon" element={<PokemonInfoPage />} />
       </Route>

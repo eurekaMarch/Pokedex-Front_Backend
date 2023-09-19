@@ -34,7 +34,7 @@ const StyledSpan = styled.span`
 `;
 
 function PokemonCard(value) {
-  const { pokemon } = value;
+  const { pokemon, onvote } = value;
 
   const bgColors = getCardColorsByPokemonTypes(pokemon?.types);
 
@@ -43,7 +43,7 @@ function PokemonCard(value) {
       <StyledCard bgcolor={bgColors} hoverable>
         <StyledHeader>
           <span>#{pokemon?.id}</span>
-          <Icon pokemon={pokemon} />
+          <Icon pokemon={pokemon} onvote={onvote} />
         </StyledHeader>
         <StyledImage>
           <img src={pokemon?.image} width={"100%"} height={"162rem"} />

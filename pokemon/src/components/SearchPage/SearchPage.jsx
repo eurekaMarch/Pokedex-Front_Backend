@@ -13,8 +13,9 @@ import {
 } from "./helper";
 import Search from "./Search";
 import PokemonCard from "./PokemonCard";
-import { pokemonApiV2 } from "../../utils/Axios";
+import { pokemonApiV2, pokemonUser } from "../../utils/Axios";
 import { filter } from "lodash";
+import useToken from "../../utils/Token";
 // import { pokemonInfo } from "../../utils/pokemonInfo";
 
 const Container = styled.div`
@@ -137,9 +138,10 @@ const initial = {
 };
 
 function SearchPage(prop) {
-  const { clearToken, user } = prop;
+  const { clearToken, user, saveToken } = prop;
   const [filterS, setFilterS] = useState({});
   const [state, setState] = useState(initial);
+  const { token } = useToken();
 
   const onFilterChange = (key, value) => {
     setFilterS((prevFilter) => {
@@ -171,7 +173,33 @@ function SearchPage(prop) {
       for (let pokemon of pokemonResults) {
         const response = await pokemonApiV2.get(`pokemon/${pokemon?.name}`);
         const monster = await response?.data;
-        await pokemonList.push(monster);
+        await pokemonList.push({ ...monster, score: 0 });
+      }
+    } catch (error) {
+      fetchError = error;
+    }
+
+    try {
+      const response = await pokemonUser.get(`pokemon/score/all`, {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+
+      if (response?.data?.data) {
+        const pokemonResults = response?.data?.data || [];
+        saveToken(response.data.token);
+
+        pokemonResults.forEach((item) => {
+          let indexTarget = pokemonList.findIndex(
+            (el) => el.id == item.pokemon_id
+          );
+          pokemonList[indexTarget] = {
+            ...pokemonList[indexTarget],
+            score: item.score,
+          };
+        });
+        console.log(pokemonList);
       }
     } catch (error) {
       fetchError = error;
@@ -183,6 +211,26 @@ function SearchPage(prop) {
       data: pokemonList,
       error: fetchError,
     }));
+  };
+
+  const onVote = async (id) => {
+    let data = {
+      item: [
+        {
+          id: id,
+        },
+      ],
+    };
+    const response = await pokemonUser.post(`pokemon/vote`, data, {
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
+    });
+    console.log("response", response);
+    if (response.data.success) {
+      fetchPokemonList();
+      saveToken(response.data.token);
+    }
   };
 
   useEffect(() => {
@@ -234,7 +282,13 @@ function SearchPage(prop) {
           <Spin />
         ) : (
           [...pokemonLists].map((pokemon) => {
-            return <PokemonCard key={pokemon?.id} pokemon={pokemon} />;
+            return (
+              <PokemonCard
+                key={pokemon?.id}
+                pokemon={pokemon}
+                onvote={onVote}
+              />
+            );
           })
         )}
       </PokemonContainer>

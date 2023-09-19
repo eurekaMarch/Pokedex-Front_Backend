@@ -63,7 +63,7 @@ const types = [
   "water",
 ];
 
-const sortby = ["ID", "Name"];
+const sortby = ["ID", "Name", "Score"];
 
 const filterBySearch = (pokemon = {}, filterSearch = "") => {
   const pokemonName = pokemon?.name;
@@ -87,6 +87,9 @@ const sortingBy = (sortBy) => {
   }
   if (sortBy === "Name") {
     return (a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0);
+  }
+  if (sortBy === "Score") {
+    return (a, b) => (a.score < b.score ? 1 : b.score < a.score ? -1 : 0);
   }
 };
 
