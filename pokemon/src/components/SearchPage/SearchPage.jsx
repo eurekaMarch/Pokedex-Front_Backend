@@ -18,49 +18,6 @@ import { filter } from "lodash";
 import useToken from "../../utils/Token";
 // import { pokemonInfo } from "../../utils/pokemonInfo";
 
-const Container = styled.div`
-  text-align: center;
-  margin-top: 2rem;
-`;
-
-const HeaderContainer = styled.div`
-  position: relative;
-`;
-const RightMenu = styled.div`
-  position: absolute;
-  top: 24px;
-  right: 0;
-  display: flex;
-  gap: 10px;
-`;
-
-const Link = styled.span`
-  color: gray;
-  cursor: pointer;
-  &:hover {
-    color: blue;
-  }
-`;
-
-const StyledRow = styled(Row)`
-  max-width: 1000px;
-  margin: auto;
-  margin-top: 2rem;
-  padding: 2rem;
-  font-size: 1rem;
-`;
-
-const StyledCol = styled(Col)`
-  font-size: 1rem;
-`;
-
-const PokemonContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 2rem;
-`;
-
 const regionDropdownItems = regions.map((r) => {
   return {
     ...r,
@@ -320,3 +277,46 @@ export default SearchPage;
 Click me
 </StyledButton> */
 }
+
+const Container = styled.div`
+  text-align: center;
+  margin-top: 2rem;
+`;
+
+const HeaderContainer = styled.div`
+  position: relative;
+`;
+const RightMenu = styled.div`
+  position: absolute;
+  top: 24px;
+  right: 0;
+  display: flex;
+  gap: 10px;
+`;
+
+const Link = styled.span`
+  color: gray;
+  cursor: pointer;
+  &:hover {
+    color: blue;
+  }
+`;
+
+const StyledRow = styled(Row)`
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 2rem;
+  padding: 2rem;
+  font-size: 1rem;
+`;
+
+const StyledCol = styled(Col)`
+  font-size: 1rem;
+`;
+
+const PokemonContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 2rem;
+`;
