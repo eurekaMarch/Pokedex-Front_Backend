@@ -9,44 +9,6 @@ import { BackwardFilled } from "@ant-design/icons";
 import { isEmpty } from "lodash";
 import { pokemonApiV2 } from "../../utils/Axios";
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  align-items: center;
-`;
-
-const StyledCard = styled(Card)`
-  width: 80%;
-  max-width: 80rem;
-  border-radius: 1rem;
-  padding: 0;
-  background: ${({ bgcolor }) =>
-    `linear-gradient(${bgcolor[0]}, ${bgcolor[1]})`};
-
-  .ant-card-body {
-    padding: 0;
-  }
-`;
-
-const StyledBackward = styled(BackwardFilled)`
-  font-size: 3rem;
-`;
-
-const StyledRow = styled(Row)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const StyledCol1 = styled(Col)`
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledCol2 = styled(Col)`
-  padding: 0 1rem 1rem;
-`;
-
 const initial = {
   data: {},
   loading: false,
@@ -128,3 +90,41 @@ function PokemonInfoPage() {
 }
 
 export default PokemonInfoPage;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  align-items: center;
+`;
+
+const StyledCard = styled(Card)`
+  width: 80%;
+  max-width: 80rem;
+  border-radius: 1rem;
+  padding: 0;
+  background: ${({ bgcolor }) =>
+    `linear-gradient(${bgcolor[0]}, ${bgcolor[1]})`};
+
+  .ant-card-body {
+    padding: 0;
+  }
+`;
+
+const StyledBackward = styled(BackwardFilled)`
+  font-size: 3rem;
+`;
+
+const StyledRow = styled(Row)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const StyledCol1 = styled(Col)`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledCol2 = styled(Col)`
+  padding: 0 1rem 1rem;
+`;
