@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { pokemonUser } from "../../utils/Axios";
-import FormLogin from "./Formlogin";
+import FormLogin from "./FormLogin";
 import FormRegister from "./FormRegister";
 import { Alert } from "antd";
 
