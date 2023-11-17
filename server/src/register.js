@@ -1,4 +1,4 @@
-const pool = require("../db/pool");
+const pool = require("../DB/pool");
 const { uuid } = require("uuidv4");
 const common = require("./common/common");
 
