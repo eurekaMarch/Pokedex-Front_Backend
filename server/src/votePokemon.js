@@ -1,4 +1,4 @@
-const pool = require("../db/pool");
+const pool = require("../DB/pool");
 const common = require("./common/common");
 
 const votePokemon = async (req, res) => {
